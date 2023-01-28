@@ -22,12 +22,40 @@ class Design {
     async findDesign(req, res) {
       console.log("findDesign function start");
       try {
-        const Data = await design.findOne({_id: req.body._id}).populate("category_id");
+        const Data = await design.findOne({_id: req.body._id});
         res.json(Data);
       } catch (error) {
         console.log(error);
       }
     }
+
+    async findAllDesign(req, res) {
+      console.log("findDesign function start");
+      try {
+        const Data = await design.find(req.body);
+        res.json(Data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // async searchapi(req, res) {
+    //   console.log("findDesign function start");
+    //   try {
+    //     console.log(req.query.key)
+    //     const Data = await design.find(
+    //       {
+    //         "$and":[
+    //           {"name":{$regex:req.query.key}}
+    //         ]
+    //       }
+    //     );
+
+    //     res.json(Data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
 }
 
 module.exports = new Design();

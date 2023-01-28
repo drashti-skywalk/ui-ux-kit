@@ -33,7 +33,6 @@ class User {
           rate_email: req.body.rate_email
         };
         Data = await user.create(createObject);
-
       }
 
       const authToken = jwt.sign(
@@ -86,6 +85,58 @@ class User {
       res.json(error);
     }
   }
+
+  async updateUser(req, res) {
+    console.log("updateUser function start");
+    try {
+      if (!req.body._id) {
+        throw new Error("Please provide id");
+      }
+      await user.findByIdAndUpdate(req.body._id, req.body);
+      res.json("Data updated successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async logoutUser(req, res) {
+    console.log("logoutUser function start");
+    try {
+
+      let updateObject = {
+        authToken: null,
+      };
+
+      let updateUserData = await user.findOneAndUpdate(
+        {
+          _id: req.body._id,
+        },
+        {
+          $set: updateObject,
+        },
+        {
+          new: true,
+        }
+      ).exec();
+
+      res.json({
+        message: "successfully Logged out",
+        data: updateUserData,
+      });
+    } catch (error) {
+      res.json({
+        message:
+          typeof error === "string"
+            ? error
+            : typeof error.message === "string"
+            ? error.message
+            : constants.server_error,
+      });
+
+      return;
+    }
+  }
+
 }
 
 module.exports = new User();

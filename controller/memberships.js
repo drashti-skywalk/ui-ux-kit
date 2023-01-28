@@ -14,12 +14,29 @@ class Membership {
             throw new Error("Please provide title");
           }
           const Data = await membership.create(req.body);
-          res.json(Data);
+
+          res.json({
+            message: "addMembership successfully",
+            data: Data
+          });
         } catch (error) {
           console.log(error);
         }
     }
 
+    async findMembership(req, res) {
+      console.log("findMembership function start");
+      try {
+        // const Data = await categoryModel.find();
+        const Data = await membership.find(req.body);
+        res.json({
+          message: "findMembership successfully",
+          data: Data
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
 }
 
 module.exports = new Membership();

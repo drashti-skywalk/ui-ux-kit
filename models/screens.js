@@ -5,17 +5,16 @@ const screenSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  title: {
-    type: String,
-    required: false,
-  },
-  descreption: {
-    type: String,
-    required: false,
-  },
+  // title: {
+  //   type: String,
+  //   required: false,
+  // },
+  // descreption: {
+  //   type: String,
+  //   required: false,
+  // },
   screen_img: {
-    type: String,
-    required: false,
+    type: String
   },
   design_id: {
     type: mongoose.Schema.Types.ObjectId,

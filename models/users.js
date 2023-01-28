@@ -15,11 +15,10 @@ const userSchema = mongoose.Schema({
   },
   phone:{
     type: String,
-    required: true,
+    required: false,
   },
   profile_pic:{
     type: String,
-    required: true,
   },
   memberships_id: {
     type: mongoose.Schema.Types.ObjectId,

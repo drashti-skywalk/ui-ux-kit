@@ -5,18 +5,21 @@ class Screen {
   async addScreen(req, res) {
     console.log("addScreen function start");
     try {
-      if (!req.body.name) {
-        throw new Error("Please provide name");
-      }
+      // if (!req.body._id) {
+      //   throw new Error("Please provide name");
+      // }
 
       // Check if this user already exisits
-      let Data = await screen.findOne({ name: req.body.name });
+      let Data = await screen.findOne({ _id: req.body._id });
       if (Data) {
         return res.status(400).send('That screen already exisits!');
       } else {
         Data = await screen.create(req.body);
       }     
-      res.json(Data);
+      res.json({
+        message: "addScreen successfully",
+        data: Data
+      });
     } catch (error) {
       console.log(error);
     }
@@ -25,8 +28,11 @@ class Screen {
   async findScreen(req, res) {
     console.log("findScreen function start");
     try {
-      const Data = await screen.findOne({name: req.body.name}).populate("design_id");
-      res.json(Data);
+      const Data = await screen.findOne(req.body);
+      res.json({
+        message:"findScreen successfully",
+        data: Data
+      });
     } catch (error) {
       console.log(error);
     }

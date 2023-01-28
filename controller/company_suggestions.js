@@ -11,7 +11,10 @@ class Company_Suggestion {
     //   }
       
       const Data = await company_suggestion.create(req.body);
-      res.json(Data);
+      res.json({
+        message: "add_Company_Suggestion successfully",
+        data: Data
+      });
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +24,10 @@ class Company_Suggestion {
     console.log("list_company_suggestions function start");
     try {
       const Data = await company_suggestion.findOne({user_id: req.body.user_id});
-      res.json(Data);
+      res.json({
+        message: "list_company_suggestions successfully",
+        data: Data
+      });
     } catch (error) {
       console.log(error);
     }
